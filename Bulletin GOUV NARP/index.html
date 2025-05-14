@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)https://sloslo3215.github.io/Adminstratif-PMFivem-/bulletin.html -->
+<html lang="fr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Rédaction de Bulletin</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e2f;
+            color: #f0f0f0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            background-color: #2e2e3e;
+            border: 1px solid #444;
+            color: #fff;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>📝 Rédaction de Bulletin de Service</h1>
+
+    <div class="form-group">
+        <label for="date_debut">Date de prise de service :</label>
+        <input type="date" id="date_debut" required="">
+    </div>
+
+    <div class="form-group">
+        <label for="heure_debut">Heure de prise de service :</label>
+        <input type="time" id="heure_debut" required="">
+    </div>
+
+    <div class="form-group">
+        <label for="date_fin">Date de fin de service :</label>
+        <input type="date" id="date_fin" required="">
+    </div>
+
+    <div class="form-group">
+        <label for="heure_fin">Heure de fin de service :</label>
+        <input type="time" id="heure_fin" required="">
+    </div>
+
+    <div class="form-group">
+        <label for="agent">Nom de l'agent :</label>
+        <input type="text" id="agent" required="">
+    </div>
+
+    <div class="form-group">
+        <label for="contenu">Contenu du bulletin :</label>
+        <textarea id="contenu" rows="6" required=""></textarea>
+    </div>
+
+    <button onclick="envoyerBulletin()">📤 Envoyer le Bulletin</button>
+
+    <script>
+        function envoyerBulletin() {
+            const dateDebut = document.getElementById("date_debut").value;
+            const heureDebut = document.getElementById("heure_debut").value;
+            const dateFin = document.getElementById("date_fin").value;
+            const heureFin = document.getElementById("heure_fin").value;
+            const agent = document.getElementById("agent").value;
+            const contenu = document.getElementById("contenu").value;
+
+            const message = `📋 **BULLETIN DE SERVICE**
+
+📅 **Date de prise de service :** ${dateDebut}
+🕒 **Heure de prise de service :** ${heureDebut}
+
+📅 **Date de fin de service :** ${dateFin}
+🕒 **Heure de fin de service :** ${heureFin}
+
+👮 **Agent :** ${agent}
+
+📄 **Contenu du bulletin :**  
+${contenu}`;
+
+            const webhookUrl = "https://discord.com/api/webhooks/1371826495667830784/StvGtClsVEIOgSFYYZHfk4oen6cEM1lMnKIUP6lyyhXWXaNj3mbLWpZD-hulrVLACUFX";
+
+            const messages = découperMessage(message, 2000);
+
+            envoyerEnChaines(messages, webhookUrl)
+                .then(() => alert("✅ Bulletin envoyé sur Discord !"))
+                .catch(error => {
+                    console.error(error);
+                    alert("❌ Une erreur est survenue lors de l'envoi.");
+                });
+        }
+
+        function découperMessage(message, maxLongueur) {
+            const parties = [];
+            let reste = message;
+
+            while (reste.length > maxLongueur) {
+                let coupure = reste.lastIndexOf('\n', maxLongueur);
+                if (coupure === -1) coupure = maxLongueur;
+
+                parties.push(reste.slice(0, coupure));
+                reste = reste.slice(coupure).trim();
+            }
+
+            if (reste.length > 0) {
+                parties.push(reste);
+            }
+
+            return parties;
+        }
+
+        async function envoyerEnChaines(messages, webhookUrl) {
+            for (const msg of messages) {
+                await fetch(webhookUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ content: msg })
+                });
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+        }
+    </script>
+
+
+</body></html>
