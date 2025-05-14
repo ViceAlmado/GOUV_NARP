@@ -7,9 +7,10 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #000000, #4b4b4b) center/cover;
-            min-height: 100vh
+            min-height: 100vh;
             color: #f0f0f0;
             padding: 20px;
+            
         }
         h1 {
             text-align: center;
@@ -23,27 +24,31 @@
         }
         input, textarea, select {
             width: 50%;
-            padding: 8px;
+            padding: 28px;
             background-color: #2e2e3e;
             border: 1px solid #444;
             color: #fff;
             border-radius: 5px;
+            text-align: center;
+        
         }
         button {
-            background-color: #007bff;
+            background-color: #07ac22;
             color: white;
-            padding: 12px 20px;
+            padding: 20px 35px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             margin-top: 20px;
+            transition: background 0.3s ease;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #288128;
         }
     </style>
 </head>
+
 <body>
     <h1>📝 Rédaction de Rapport</h1>
 
@@ -93,12 +98,12 @@
         function envoyerRapport() {
             const date = document.getElementById("date").value;
             const heure = document.getElementById("heure").value;
-            const grade = document.getElementById("Nom de la personne").value;
-            const agent = document.getElementById("Prénom de la personne").value;
-            const infraction = document.getElementById("Age de la personne").value;
-            const identite = document.getElementById("Date de naissance de l'individu").value;
-            const vehicule = document.getElementById("Sexe de l'individu").value;
-            const deroulement = document.getElementById("Nationalité de l'individu).value;
+            const grade = document.getElementById("grade").value;
+            const agent = document.getElementById("agent").value;
+            const infraction = document.getElementById("infraction").value;
+            const identite = document.getElementById("identite").value;
+            const vehicule = document.getElementById("vehicule").value;
+            const deroulement = document.getElementById("deroulement").value;
 
             const message = `📋 **Dossier d'identitée**
 
@@ -117,7 +122,7 @@ ${vehicule}
 📄 **Déroulé de la situation :**  
 ${deroulement}`;
 
-            const webhookUrl = "https://discord.com/api/webhooks/1372251570107846706/mHHMpezlB-p8a6FBSQnsX6o3yuTDF03YaJnUspKZO2zmr_F3niFUGYPxNULVcEo3HWM7";
+            const webhookUrl = "https://discord.com/api/webhooks/1372318931624263741/Hl39X9_arsmmlvR2GDgkZsUrO_hvt5GPz-kIEAJ9ZwQ0xqQbCU4LMb3rc_1Y08KypjQi";
 
             const messages = découperMessage(message, 2000);
 
