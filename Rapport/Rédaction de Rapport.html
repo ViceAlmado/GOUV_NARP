@@ -5,16 +5,10 @@
     <title>Rédaction de Rapport</title>
     <style>
         body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #000000, #4b4b4b);
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
+            color: #f0f0f0;
+            padding: 20px;
         }
         h1 {
             text-align: center;
@@ -78,18 +72,18 @@
     </div>
 
     <div class="form-group">
-        <label for="identite">Identité et coordonnées :</label>
-        <textarea id="identite" rows="4" placeholder="Nom, prénom, adresse, etc." required=""></textarea>
+        <label for="infraction">Identité et coordonnées :</label>
+        <input type="text" id="identite" required="">
     </div>
 
     <div class="form-group">
         <label for="vehicule">Informations sur le véhicule :</label>
-        <textarea id="vehicule" rows="3" placeholder="Modèle, plaque, couleur, etc." required=""></textarea>
+        <input type="text" id="vehicule" required="">
     </div>
 
     <div class="form-group">
-        <label for="deroulement">Déroulé de la situation :</label>
-        <textarea id="deroulement" rows="6" required=""></textarea>
+        <label for="deroulement">>Déroulé de la situation :</label>
+        <input type="text" id="deroulement" required="">
     </div>
 
     <button onclick="envoyerRapport()">📤 Envoyer le Rapport</button>
@@ -98,14 +92,14 @@
         function envoyerRapport() {
             const date = document.getElementById("date").value;
             const heure = document.getElementById("heure").value;
-            const grade = document.getElementById("grade").value;
-            const agent = document.getElementById("agent").value;
-            const infraction = document.getElementById("infraction").value;
-            const identite = document.getElementById("identite").value;
-            const vehicule = document.getElementById("vehicule").value;
-            const deroulement = document.getElementById("deroulement").value;
+            const grade = document.getElementById("Nom de la personne").value;
+            const agent = document.getElementById("Prénom de la personne").value;
+            const infraction = document.getElementById("Age de la personne").value;
+            const identite = document.getElementById("Date de naissance de l'individu").value;
+            const vehicule = document.getElementById("Sexe de l'individu").value;
+            const deroulement = document.getElementById("Nationalité de l'individu).value;
 
-            const message = `📋 **RAPPORT DE POLICE**
+            const message = `📋 **Dossier d'identitée**
 
 📅 **Date :** ${date}
 🕒 **Heure :** ${heure}
@@ -127,7 +121,7 @@ ${deroulement}`;
             const messages = découperMessage(message, 2000);
 
             envoyerEnChaines(messages, webhookUrl)
-                .then(() => alert("✅ Rapport envoyé sur Discord !"))
+                .then(() => alert("✅ Dossier envoyé sur Discord !"))
                 .catch(error => {
                     console.error(error);
                     alert("❌ Une erreur est survenue lors de l'envoi.");
